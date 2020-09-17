@@ -46,17 +46,22 @@ def main():
     print()
     print("""
         <html>
-            <head><title>てくてくらいふ</title></head>
+            <head>
+                <title>てくてくらいふ</title>
+                {google_tracking_tag}
+            </head>
             <body>
                 ここは、雑記ブログです。<br>
                 当面の目標は、勉強を兼ねて一からブログを「作る」を目標にしています。<br>
+                生々しい制作の過程をGithubのcommitから感じ取って頂けると幸いです…ｗ<br>
                 <hr>
-    """)
+    """.format(google_tracking_tag = conf.google_tracking_tag))
 
     gen_article(article)
 
     print("""
             <a href="https://twitter.com/tekutekulife0">Twitter</a><br>
+            <a href="https://github.com/tekuteku-life/">Github</a><br>
 
                 <footer>
                     Copyright 2020 tekuteku.life
