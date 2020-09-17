@@ -1,0 +1,23 @@
+DirectoryIndex index.html index.htm index.cgi index.py main.py
+
+Options -Indexes
+
+Options +ExecCGI
+AddHandler cgi-script .cgi .py .pl .rb
+AddType application/x-httpd-cgi .cgi .py .pl .rb
+
+# ErrorDocument 400 error.cgi?400
+# ErrorDocument 401 error.cgi?401
+# ErrorDocument 403 error.cgi?403
+# ErrorDocument 404 error.cgi?404
+# ErrorDocument 500 error.cgi?500
+
+# RewriteEngine on
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# RewriteEngine On
+# RewriteBase /
+# RewriteCond %{REQUEST_URI} ^（httpsにリダイレクトしたいページの相対パス）.*$ [OR]
+# RewriteCond %{REQUEST_URI} ^/form/.*$
+# RewriteRule ^.*$ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
