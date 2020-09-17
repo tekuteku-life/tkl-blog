@@ -6,3 +6,11 @@ Making original blog (CMS) System to achieving follows:
 
 ## Goal
 None.
+
+## File structure
+```txt
+/ -|
+   |- main.py               // Main page
+   |- conf.py               // Configuration file
+   |- accessarticle.py      // Article data accessor
+```
