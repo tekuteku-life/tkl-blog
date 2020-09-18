@@ -113,7 +113,11 @@ def main():
 		print()
 		print("""
 			<html>
-				<head><title>POST</title></head>
+				<head>
+					<title>POST</title>
+					<link rel="stylesheet" href="./css/post.css">
+					<script type="text/javascript" src="./js/post.js"></script>
+				</head>
 				<body>
 					<form action="{my_file_name}" method="post">
 						<input type="hidden" name="mode" value="post">

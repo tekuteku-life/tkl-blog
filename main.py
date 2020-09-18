@@ -39,11 +39,15 @@ def gen_article(article):
 		date = dt.strftime('%Y/%m/%d %H:%M:%S')
 		
 		print("""
-			<a href="./?id={0}">{1}</a><br>
-			{4}
-			<br>
-			at {2}, by {3}
-			<hr>
+			<article>
+				<h3 class="article_title"><a href="./?id={0}">{1}</a></h3>
+				<div class="article_body">
+					{4}
+				</div>
+				<footer class="article_footer">
+					<div>at {2}, by {3}</div>
+				</footer>
+			</article>
 		""".format(data["id"], data["title"], date, acc_author.id2name(data["author"]), content) )
 
 
@@ -56,29 +60,41 @@ def main():
 	print("Content-type: text/html; charset=UTF-8;")
 	print()
 	print("""
-		<html>
+		<!DOCTYPE html>
+		<html lang="ja">
 			<head>
 				<title>てくてくらいふ</title>
+				<meta name="viewport" content="width=device-width,initial-scale=1">
+				<link rel="stylesheet" href="./css/main.css">
+				<script type="text/javascript" src="./js/default.js"></script>
+				<script type="text/javascript" src="./js/main.js"></script>
 				{google_tracking_tag}
 			</head>
 			<body>
-				ここは、雑記ブログです。<br>
-				当面の目標は、勉強を兼ねて一からブログを「作る」を目標にしています。<br>
-				生々しい制作の過程をGithubのcommitから感じ取って頂けると幸いです…ｗ<br>
-				<hr>
+				<header>
+					<h1><a href="https://tekuteku.life">てくてくらいふ</a></h1>
+					<p class="page_description">
+						7年ぶりぐらいのブランクを経て、久しぶりに自分のWebページを持ってみました。<br>
+						当面の目標は、勉強を兼ねて一からブログを「作る」を目標にしています。<br>
+						生々しい制作の過程をGithubのcommitから感じ取って頂けると幸いです…ｗ<br>
+						日々の生活、子育て、カメラ、それとプログラミングについて、語れることを語れるだけ。<br>
+					</p>
+				</header>
 	""".format(google_tracking_tag = conf.google_tracking_tag))
 
 	gen_article(article)
 
 	print("""
-			<a href="https://twitter.com/tekutekulife0">Twitter</a><br>
-			<a href="https://github.com/tekuteku-life/">Github</a><br>
-
 				<footer>
-					Copyright 2020 tekuteku.life
-				</footer>
-			</body>
-		</html>
+				<p>
+					<a href="https://twitter.com/tekutekulife0">Twitter</a><br>
+					<a href="https://github.com/tekuteku-life/">Github</a><br>
+				</p>
+
+				<small class="copyright">Copyright 2020 tekuteku.life</small>
+			</footer>
+		</body>
+	</html>
 	""")
 
 
