@@ -6,6 +6,9 @@ Options +ExecCGI
 AddHandler cgi-script .cgi .py .pl .rb
 AddType application/x-httpd-cgi .cgi .py .pl .rb
 
+Header add Pragma "no-cache"
+Header set Cache-Control no-cache
+
 # ErrorDocument 400 error.cgi?400
 # ErrorDocument 401 error.cgi?401
 # ErrorDocument 403 error.cgi?403
