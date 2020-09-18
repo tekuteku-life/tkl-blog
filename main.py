@@ -23,12 +23,16 @@ from datetime import datetime
 
 import conf
 from accessarticle import AccessArticle
+from accessauthor import AccessAuthor
 
 
 #============================================================
 # Generate article part
 #============================================================
 def gen_article(article):
+
+	acc_author = AccessAuthor()
+
 	for data in article.read_all():
 		content = re.sub("\r\n|\r|\n", "<br>", data["content"])
 		dt = datetime.fromtimestamp(float(data["date"]))
@@ -40,7 +44,7 @@ def gen_article(article):
 			<br>
 			at {2}, by {3}
 			<hr>
-		""".format(data["id"], data["title"], date, data["author"], content) )
+		""".format(data["id"], data["title"], date, acc_author.id2name(data["author"]), content) )
 
 
 #============================================================
