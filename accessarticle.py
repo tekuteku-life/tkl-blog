@@ -13,6 +13,9 @@ import conf
 import MySQLdb
 
 
+#============================================================
+# Article accessor class
+#============================================================
 class AccessArticle:
 	
 	def __init__(self):
