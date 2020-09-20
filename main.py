@@ -9,7 +9,7 @@
 #============================================================
 # Import & default setting
 #============================================================
-# import cgi
+import cgi
 import io
 import sys
 sys.dont_write_bytecode = True
@@ -27,36 +27,9 @@ from accessauthor import AccessAuthor
 
 
 #============================================================
-# Generate article part
-#============================================================
-def gen_article(article):
-
-	acc_author = AccessAuthor()
-
-	for data in article.read_all():
-		content = re.sub("\r\n|\r|\n", "<br>", data["content"])
-		dt = datetime.fromtimestamp(float(data["date"]))
-		date = dt.strftime('%Y/%m/%d %H:%M:%S')
-		
-		print("""
-			<article>
-				<h3 class="article_title"><a href="./?id={0}">{1}</a></h3>
-				<div class="article_body">
-					{4}
-				</div>
-				<footer class="article_footer">
-					<div>at {2}, by {3}</div>
-				</footer>
-			</article>
-		""".format(data["id"], data["title"], date, acc_author.id2name(data["author"]), content) )
-
-
-#============================================================
-# Main
-#============================================================
-def main():
-	article = AccessArticle()
-
+# Print Header part
+#============================================================]
+def print_header():
 	print("Content-type: text/html; charset=UTF-8;")
 	print()
 	print("""
@@ -82,8 +55,41 @@ def main():
 				</header>
 	""".format(google_tracking_tag = conf.google_tracking_tag))
 
-	gen_article(article)
 
+#============================================================
+# Generate article part
+#============================================================
+def gen_article(article, args):
+
+	acc_author = AccessAuthor()
+
+	if args.getvalue("id"):
+		data_list = article.read_by_id(args.getvalue("id"))
+	else:
+		data_list = article.read_all()
+
+	for data in data_list:
+		content = re.sub("\r\n|\r|\n", "<br>", data["content"])
+		dt = datetime.fromtimestamp(float(data["date"]))
+		date = dt.strftime('%Y/%m/%d %H:%M:%S')
+		
+		print("""
+			<article>
+				<h3 class="article_title"><a href="./?id={0}">{1}</a></h3>
+				<div class="article_body">
+					{4}
+				</div>
+				<footer class="article_footer">
+					<div>at {2}, by {3}</div>
+				</footer>
+			</article>
+		""".format(data["id"], data["title"], date, acc_author.id2name(data["author"]), content) )
+
+
+#============================================================
+# Print Footer part
+#============================================================
+def print_footer():
 	print("""
 				<footer>
 				<p>
@@ -96,6 +102,17 @@ def main():
 		</body>
 	</html>
 	""")
+
+#============================================================
+# Main
+#============================================================
+def main():
+	args = cgi.FieldStorage()
+	article = AccessArticle()
+
+	print_header()
+	gen_article(article, args)
+	print_footer()
 
 
 if __name__ == "__main__":
