@@ -39,5 +39,5 @@ class AccessArticle:
 
 	def read_all(self):
 		cur = self.con.cursor()
-		cur.execute("select * from {}".format(conf.db_article_tbl_name))
+		cur.execute("select * from {} order by date desc".format(conf.db_article_tbl_name))
 		return [ {"id": id, "title": title, "date": date, "author": author, "content": content} for id, title, date, author, content in cur.fetchall() ]
