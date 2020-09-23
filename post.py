@@ -109,7 +109,7 @@ def main():
 		post_article(form_data)
 	else:
 		my_file_name = os.path.basename(__file__)
-		print("Content-type: text\html; charset=UTF-8")
+		print("Content-type: text/html; charset=UTF-8")
 		print()
 		print("""
 			<html>
