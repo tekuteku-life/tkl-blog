@@ -1,4 +1,7 @@
 
+@import url("markdown.css");
+@import url("article.css");
+
 header {
 	background-color: #ededed;
 	margin-bottom: 1rem;

@@ -1,0 +1,12 @@
+
+.md_bold {
+	font-weight: bold;
+}
+
+.md_italic {
+	font-style: italic;
+}
+
+.md_line_through {
+	text-decoration: line-through;
+}

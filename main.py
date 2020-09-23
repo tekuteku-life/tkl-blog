@@ -24,6 +24,7 @@ from datetime import datetime
 import conf
 from accessarticle import AccessArticle
 from accessauthor import AccessAuthor
+import markdown
 
 
 #============================================================
@@ -70,7 +71,8 @@ def gen_article(article, args):
 		data_list = article.read_all()
 
 	for data in data_list:
-		content = re.sub("\r\n|\r|\n", "<br>", data["content"])
+		content = data["content"]
+		content = markdown.translate_markdown(content)
 		dt = datetime.fromtimestamp(float(data["date"]))
 		date = dt.strftime('%Y/%m/%d %H:%M:%S')
 		

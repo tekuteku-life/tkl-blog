@@ -1,0 +1,37 @@
+.article_body h1,
+.article_body h2,
+.article_body h3,
+.article_body h4,
+.article_body h5,
+.article_body h6 {
+	margin-left: 0;
+}
+
+.article_body h1 {
+	font-size: 1.8rem;
+}
+.article_body h2 {
+	font-size: 1.5rem;
+}
+
+.article_body h3 {
+	font-size: 1.2rem;
+}
+
+.article_body h4 {
+	font-size: 1rem;
+}
+
+.article_body h5 {
+	font-size: 0.8rem;
+}
+
+.article_body h6 {
+	font-size: 0.6rem;
+}
+
+.article_body hr {
+	border-style: dashed;
+	border-color: #444444;
+	border-width: 1px 0 0 0;
+}
