@@ -35,3 +35,22 @@
 	border-color: #444444;
 	border-width: 1px 0 0 0;
 }
+
+.article_body blockquote {
+	margin: 0.5rem 0.2rem 0.5rem 0.5rem;
+	padding: 0.5rem 0 0.5rem 0.5rem;
+
+	border-style: solid;
+	border-color: #888888;
+	border-width: 0 0 0 3px;
+}
+.article_body blockquote blockquote {
+	margin-left: 0.05rem;
+}
+
+.article_body mark {
+	background-color: #afafff;
+	border-radius: 0.5rem;
+
+	padding: 0.1rem 0.3rem;
+}
