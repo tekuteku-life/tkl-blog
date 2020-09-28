@@ -58,29 +58,32 @@ def __md_func_list(t, tag_name, mark):
 				ins_head = True
 				r = r + HEAD_TAG
 			else:
+				r = r + "</li>\n"
 				sp_cnt = m.group(1).count(" ") or m.group(1).count("\t")*4
 				if sp_cnt > prev_sp_cnt:
 					list_dep = list_dep + 1
 					r = r + HEAD_TAG
-
+			
 			if sp_cnt < prev_sp_cnt:
 				list_dep = list_dep - 1
 				r = r + FOOT_TAG
-				
-			r = r + "<li>" + m.group(2) + "</li>"
+			
+			r = r + "<li>" + m.group(2)
 
 			prev_sp_cnt = sp_cnt
 		else:
 			m = re.search(r"^([ \t]+)", l)
 			if m:
 				sp_cnt = m.group(1).count(" ") or m.group(1).count("\t")*4
-			if sp_cnt == 0 and (list_dep > 0 or prev_sp_cnt != 0):
-				while list_dep > 0:
-					list_dep = list_dep - 1
+			if sp_cnt == 0:
+				if (list_dep > 0 or prev_sp_cnt != 0):
+					while list_dep > 0:
+						list_dep = list_dep - 1
+						r = r + "</li>\n"
+						r = r + FOOT_TAG
 					r = r + FOOT_TAG
-				r = r + FOOT_TAG
-				prev_sp_cnt = 0
-				ins_head = False
+					prev_sp_cnt = 0
+					ins_head = False
 			
 			r = r + l
 		
