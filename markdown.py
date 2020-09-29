@@ -46,48 +46,60 @@ def md_func_line(t):
 def __md_func_list(t, tag_name, mark):
 	HEAD_TAG = "<{}>\n".format(tag_name)
 	FOOT_TAG = "</{}>\n".format(tag_name)
-	r = ""
-	ins_head = False
+	r = HEAD_TAG
 	prev_sp_cnt = 0
-	list_dep = 0
-	for l in t.split("\n"):
-		m = re.search(r"^([ \t]*)" + mark + r"[ \t]+(.+)", l)
-		sp_cnt = 0
-		if m:
-			if ins_head == False:
-				ins_head = True
-				r = r + HEAD_TAG
-			else:
-				r = r + "</li>\n"
-				sp_cnt = m.group(1).count(" ") or m.group(1).count("\t")*4
-				if sp_cnt > prev_sp_cnt:
-					list_dep = list_dep + 1
-					r = r + HEAD_TAG
-			
-			if sp_cnt < prev_sp_cnt:
-				list_dep = list_dep - 1
-				r = r + FOOT_TAG
-			
-			r = r + "<li>" + m.group(2)
+	step_cnt = 0
+	in_list = False
 
+	for l in t:
+		m = re.search(r"^([ \t]*)" + mark + r"[ \t]+(.+)$", l)
+		if m:
+			if in_list:
+				r = r + "</li>\n"
+			in_list = True
+
+			sp_cnt = m.group(1).count("    ") or m.group(1).count("\t")
+			if sp_cnt > prev_sp_cnt:
+				step_cnt = step_cnt + 1
+				r = r + HEAD_TAG
+			elif sp_cnt < prev_sp_cnt:
+				step_cnt = step_cnt - 1
+				r = r + FOOT_TAG
 			prev_sp_cnt = sp_cnt
-		else:
-			m = re.search(r"^([ \t]+)", l)
-			if m:
-				sp_cnt = m.group(1).count(" ") or m.group(1).count("\t")*4
-			if sp_cnt == 0:
-				if (list_dep > 0 or prev_sp_cnt != 0):
-					while list_dep > 0:
-						list_dep = list_dep - 1
-						r = r + "</li>\n"
-						r = r + FOOT_TAG
-					r = r + FOOT_TAG
-					prev_sp_cnt = 0
-					ins_head = False
 			
-			r = r + l
-		
-		r = r + "\n"
+			r = r + "<li>" + m.group(2) + "\n"
+		else:
+			r = r + l + "\n"
+
+	r = r + "</li>\n"
+	
+	while step_cnt > 0:
+		r = r + FOOT_TAG
+		step_cnt = step_cnt - 1
+
+	r = r + FOOT_TAG
+	return r
+
+def md_func_list(t, tag_name, mark):
+	r = ""
+	list_buf = []
+	in_list = False
+	for l in t.split("\n"):
+		if in_list:
+			if l == "":
+				in_list = False
+				r = r + __md_func_list(list_buf, tag_name, mark)
+				list_buf.clear()
+				r = r + "\n"
+			else:
+				list_buf.append(l)
+		else:
+			m = re.search(r"^[ \t]*" + mark + r"[ \t]+.+$", l)
+			if m:
+				in_list = True
+				list_buf.append(l)
+			else:
+				r = r + l + "\n"
 
 	return r
 
@@ -96,14 +108,14 @@ def __md_func_list(t, tag_name, mark):
 # Translation dot list
 #============================================================
 def md_func_dotlist(t):
-	return __md_func_list(t, "ul", r"\*")
+	return md_func_list(t, "ul", r"\*")
 
 
 #============================================================
 # Translation number list
 #============================================================
 def md_func_numlist(t):
-	return __md_func_list(t, "ol", r"\d+\.")
+	return md_func_list(t, "ol", r"\d+\.")
 
 
 #============================================================
@@ -181,7 +193,7 @@ def md_func_mark(t):
 #============================================================
 def md_func_paragraph(t):
 	ins_flg = False
-	r = ""
+	r = "<p>\n"
 	for l in t.split("\n"):
 		if l != "":
 			if ins_flg:
