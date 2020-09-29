@@ -199,6 +199,71 @@ def md_func_paragraph(t):
 
 
 #============================================================
+# Translation table
+#============================================================
+def __md_func_table(t):
+	r = ""
+	cells = []
+	aligns = []
+
+	# split cells
+	for l in t.split("\n"):
+		if l != "":
+			cells.append([re.sub(r"^[ \t]+|[ \t]+$", "", c) for c in l.split("|") if c != ""])
+	
+	# parse align
+	for al in cells[1]:
+		m = re.search(r"-{3,}", al)
+		if not m:
+			return t
+		
+		lm = re.search(r"^:", al)
+		rm = re.search(r":$", al)
+		if lm and rm:
+			aligns.append("center")
+		elif rm:
+			aligns.append("right")
+		else:
+			aligns.append("left")
+
+	# make header
+	r = "\n\n<table>\n<tr>\n"
+	i = 0
+	for c in cells[0]:
+		r = r + "<th class=\"{}\">{}</th>".format(aligns[i], c)
+		i = i + 1
+	r = r + "</tr>"
+
+	del cells[0:2]
+
+	for row in cells:
+		r = r + "<tr>\n"
+		i = 0
+		for c in row:
+			r = r + "<td class=\"{}\">{}</td>".format(aligns[i], c)
+			i = i + 1
+		r = r + "\n</tr>\n"
+	
+	r = r + "</table>\n"
+	
+	return r
+			
+def md_func_table(t):
+	tbl_buf = ""
+	r = ""
+	for l in t.split("\n"):
+		m = re.search(r"^[ \t]*(?:\|[^\|]+)+\|[ \t]*$", l)
+		if m:
+			tbl_buf = tbl_buf + l + "\n"
+		elif tbl_buf != "":
+			r = r + __md_func_table(tbl_buf)
+			tbl_buf = ""
+		else:
+			r = r + l + "\n"
+	return r
+
+
+#============================================================
 # Markdown translation
 #============================================================
 def translate_markdown(t):
@@ -215,6 +280,8 @@ def translate_markdown(t):
 	t = md_func_line(t)
 	t = md_func_pretext(t)
 	t = md_func_anchor(t)
+
+	t = md_func_table(t)
 
 	t = md_func_paragraph(t)
 	

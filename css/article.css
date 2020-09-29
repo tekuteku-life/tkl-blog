@@ -54,3 +54,27 @@
 
 	padding: 0.1rem 0.3rem;
 }
+
+.article_body table,
+.article_body table th,
+.article_body table td {
+	border-collapse: collapse;
+	border-style: solid;
+	border-color: #000000;
+	border-width: 1px;
+}
+
+.article_body table th.left,
+.article_body table td.left {
+	text-align: left;
+}
+
+.article_body table th.center,
+.article_body table td.center {
+	text-align: center;
+}
+
+.article_body table th.right,
+.article_body table td.right {
+	text-align: right;
+}
