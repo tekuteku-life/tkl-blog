@@ -36,6 +36,12 @@
 	border-width: 1px 0 0 0;
 }
 
+.article_body ul,
+.article_body ol {
+	padding-left: 2rem;
+	margin: 0.5rem 0;
+}
+
 .article_body blockquote {
 	margin: 0.5rem 0.2rem 0.5rem 0.5rem;
 	padding: 0.5rem 0 0.5rem 0.5rem;
