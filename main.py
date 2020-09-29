@@ -64,9 +64,9 @@ def print_header():
 def gen_article(article, args):
 
 	acc_author = AccessAuthor()
-
-	if args.getvalue("id"):
-		data_list = article.read_by_id(args.getvalue("id"))
+	id = args.getvalue("id")
+	if id:
+		data_list = article.read_by_id(id)
 	else:
 		data_list = article.read_all()
 
@@ -75,6 +75,9 @@ def gen_article(article, args):
 		content = markdown.translate_markdown(content)
 		dt = datetime.fromtimestamp(float(data["date"]))
 		date = dt.strftime('%Y/%m/%d %H:%M:%S')
+		
+		if not id:
+			content = ""
 		
 		print("""
 			<article>
