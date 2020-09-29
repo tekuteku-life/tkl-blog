@@ -284,14 +284,14 @@ def translate_markdown(t):
 	t = md_func_quotation(t)
 	t = md_func_mark(t)
 
-	t = md_func_dotlist(t)
-	t = md_func_numlist(t)
-
 	t = md_func_hx(t)
 	t = md_func_decoration(t)
 	t = md_func_line(t)
 	t = md_func_pretext(t)
 	t = md_func_anchor(t)
+
+	t = md_func_dotlist(t)
+	t = md_func_numlist(t)
 
 	t = md_func_table(t)
 
