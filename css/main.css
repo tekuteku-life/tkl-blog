@@ -37,6 +37,8 @@ body > footer {
 
 	margin-top: 1rem;
 	padding: 1rem;
+	
+	clear: both;
 }
 
 .article_title {
@@ -45,10 +47,108 @@ body > footer {
 
 .article_body {
 	margin: 0.1rem 1rem 0.1rem 1rem;
+
+	line-height: 1.4;
+}
+
+.article_body li {
+	margin: 0.5rem 0;
 }
 
 .article_footer {
+	color: #666666;
+
 	font-size: 0.8rem;
 	text-align: right;
 	margin: 0.5rem 0 0 1rem;
+}
+
+.article_list {
+	max-width: 60rem;
+	height: 100%;
+
+	float: left;
+
+	margin: 0;
+	padding: 0;
+}
+
+.article_list > ul {
+	list-style-position: inside;
+	list-style-type: none;
+
+	margin: 0;
+	padding: 0;
+}
+
+.article_list > ul > li {
+	width: 28rem;
+	height: 6rem;
+
+	box-sizing: border-box;
+	
+	border-style: solid;
+	border-color: #000000;
+	border-width: 1px 1px 1px 8px;
+
+	margin: 0.6rem;
+	padding: 0;
+
+	float: left;
+}
+
+.article_list > ul > li > a {
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	display: block;
+	padding: 0.5rem;
+	position: relative;
+}
+
+.article_list > ul > li:hover {
+	background-color: #f9f9f9;
+}
+.article_list > ul > li:nth-of-type(4n):hover {
+	border-color: yellow;
+}
+.article_list > ul > li:nth-of-type(4n+1):hover {
+	border-color: lightgreen;
+}
+.article_list > ul > li:nth-of-type(4n+2):hover {
+	border-color: red;
+}
+.article_list > ul > li:nth-of-type(4n+3):hover {
+	border-color: lightblue;
+}
+
+.article_anchor_footer {
+	color: #666666;
+	font-size: 0.8rem;
+
+	margin: 0.5rem 0 0 1rem;
+
+	text-align: right;
+	position: absolute;
+	bottom: 0;
+	right: 0.5rem;
+}
+
+nav.sidebar {
+	width: 28rem;
+	height: 100%;
+
+	font-size: 80%;
+
+	box-sizing: border-box;
+
+	display: block;
+	float: left;
+
+	border-style: solid;
+	border-color: #000000;
+	border-width: 3px 1px;
+
+	margin: 0 0 0 0.6rem;
+	padding: 0.5rem;
 }
