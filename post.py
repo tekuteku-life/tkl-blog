@@ -88,13 +88,11 @@ def post_article(form_data):
 				title: {title}<br>
 				date: {date}<br>
 				author: {author}<br>
-				content: {content}<br>
 	""".format(
 		id = id,
 		title = title,
 		date = date,
-		author = author,
-		content = content
+		author = author
 	))
 
 
@@ -122,7 +120,9 @@ def main():
 					<form action="{my_file_name}" method="post">
 						<input type="hidden" name="mode" value="post">
 						Title: <input type="text" name="title"><br>
-						Author: <input type="text" name="author"><br>
+						Author: <select name"author">
+							<option value="0">てく</option>
+						</select><br>
 						Content: <textarea name="content" width="100" height="200"></textarea><br>
 						Password: <input type="password" name="passwd"><br>
 						<input type="submit" value="Post"><br>
