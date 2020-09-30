@@ -131,9 +131,11 @@ def print_footer():
 				<li>育児</li>
 				<li>自分語り（笑）</li>
 			</ul>
+			<a href="?id=160138673274">&gt;&gt;詳細&lt;&lt;</a>
+			<hr>
 			<p>
-				<a href="https://twitter.com/tekutekulife0">Twitter</a><br>
-				<a href="https://github.com/tekuteku-life/">Github</a><br>
+				<a href="https://twitter.com/tekutekulife0">Twitter (@tekutekulife0)</a><br>
+				<a href="https://github.com/tekuteku-life/">Github (@tekuteku-life)</a><br>
 			</p>
 		</nav>
 
