@@ -120,7 +120,7 @@ def main():
 					<form action="{my_file_name}" method="post">
 						<input type="hidden" name="mode" value="post">
 						Title: <input type="text" name="title"><br>
-						Author: <select name"author">
+						Author: <select name="author">
 							<option value="0">てく</option>
 						</select><br>
 						Content: <textarea name="content" width="100" height="200"></textarea><br>
