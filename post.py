@@ -20,6 +20,7 @@ cgitb.enable()
 import os
 import time
 import html
+import re
 
 import conf
 from accessarticle import AccessArticle
@@ -45,7 +46,7 @@ def is_valid_post(form_data):
 		return False
 	if content == None or content == "":
 		return False
-	if author == None or author == "":
+	if author == None or author == "" or re.search(r"\D", author):
 		return False
 	
 	return True
