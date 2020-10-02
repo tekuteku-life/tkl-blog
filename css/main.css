@@ -139,6 +139,18 @@ body > footer {
 	right: 0.5rem;
 }
 
+.article_body img {
+	width: 320px;
+	max-width: 95%;
+
+	background-color: #ffffff;
+	padding: 2px;
+
+	border-style: solid;
+	border-color: #000000;
+	border-width: 1px;
+}
+
 nav.sidebar {
 	width: 28rem;
 	height: 100%;
