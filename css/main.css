@@ -139,7 +139,7 @@ body > footer {
 	right: 0.5rem;
 }
 
-.article_body img {
+.article_body img.md_img {
 	width: 320px;
 	max-width: 95%;
 
